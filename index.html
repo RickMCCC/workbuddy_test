@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WorkBuddy · 自然语言看板</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="#"><span>W</span> WorkBuddy</a>
+      <p class="eyebrow">WORKSPACE</p>
+      <a class="nav active" href="#dashboard">⌘　智能看板</a>
+      <a class="nav" href="#best-practice">◈　最佳实践</a>
+      <div class="sidebar-bottom"><span class="avatar">L</span><div><strong>Lin Chen</strong><small>运营负责人</small></div></div>
+    </aside>
+    <main>
+      <header><div><p class="eyebrow">ANALYTICS / Q3</p><h1>用一句话，生成需要的看板。</h1></div><button id="reset">重置视图</button></header>
+      <section class="prompt-card" aria-label="自然语言查询">
+        <label for="query">告诉 WorkBuddy 你想了解什么</label>
+        <div class="prompt-row"><input id="query" value="展示本季度各团队的项目完成率和逾期风险" /><button id="generate">生成看板 <b>↵</b></button></div>
+        <div class="chips"><button>本周市场团队的工作负载</button><button>产品项目完成趋势</button><button>有哪些高风险任务？</button><button>比较各团队效率</button></div>
+        <p id="interpretation" class="interpretation">已理解：<strong>Q3 · 全部团队 · 项目完成率与逾期风险</strong></p>
+      </section>
+      <section id="dashboard" class="dashboard">
+        <div class="section-heading"><div><p class="eyebrow">GENERATED VIEW</p><h2 id="view-title">团队交付健康度</h2></div><span id="period">2026 Q3 · 模拟数据</span></div>
+        <div class="kpis" id="kpis"></div>
+        <div class="grid">
+          <article class="card chart-card"><div class="card-head"><div><h3 id="chart-title">各团队项目完成率</h3><p id="chart-subtitle">已完成项目 / 本季度项目总数</p></div><span class="legend"><i></i>完成率</span></div><div id="bar-chart" class="bar-chart"></div></article>
+          <article class="card risk-card"><div class="card-head"><div><h3>需关注的工作</h3><p>按逾期天数和优先级排序</p></div><span class="risk-count" id="risk-count"></span></div><div id="risks"></div></article>
+        </div>
+        <article class="card table-card"><div class="card-head"><div><h3>项目明细</h3><p id="table-summary">12 个项目，覆盖 4 个团队</p></div><button class="ghost">导出 CSV</button></div><div class="table-wrap"><table><thead><tr><th>项目</th><th>团队</th><th>负责人</th><th>进度</th><th>状态</th><th>截止日期</th></tr></thead><tbody id="project-table"></tbody></table></div></article>
+      </section>
+      <section id="best-practice" class="practice"><p class="eyebrow">BEST PRACTICE</p><h2>让自然语言看板真正可靠</h2><div class="practice-grid"><article><span>01</span><h3>先定义语义层</h3><p>将“完成率”“逾期”“活跃项目”等口径写成可审计指标，避免模型自行猜测。</p></article><article><span>02</span><h3>先确认，再生成</h3><p>把模型理解的时间、对象、指标回显给用户；存在歧义时提供可点击的澄清项。</p></article><article><span>03</span><h3>展示数据证据</h3><p>每张图都标注数据时间范围、筛选条件和计算方法，并保留可下钻的明细表。</p></article><article><span>04</span><h3>设置安全护栏</h3><p>模型只输出受限的看板配置 JSON；查询由服务端参数化执行，权限在数据层强制校验。</p></article></div><div class="blueprint"><h3>推荐生成链路</h3><code>用户意图 → 指标词典映射 → 参数验证 → 查询计划 → 图表配置 → 数据与洞察</code></div></section>
+    </main>
+    <script src="./data.js"></script><script src="./app.js"></script>
+  </body>
+</html>
